@@ -7,7 +7,13 @@ let cookieArray;
 let chipArray;
 let colorArray;
 
+let mybutton;
+
 function setup() {
+  textFont("Helvetica, Arial, sans-serif");
+  mybutton.position(16,16);
+  mybutton.mousePressed(newCookieCreate());
+
   createCanvas(400, 400);
   background(240);
   colorMode(HSB,360,100,100,100);
