@@ -15,12 +15,12 @@ function setup() {
   stroke(0);
   // colorMode(HSB,360,100,100,100);
   background(220);
-  for (let i=0;i<=500;i+=500){
+
+  for (let i=0;i<=500;i+=size){
     for (let j=0;j<=height;j+=size){
       x=i;
       y=j;
       squareArray.push(new lineSquare(x,y,size));
-      
     }
   }
   port = createSerial(9600); // creates the Serial Port
@@ -64,17 +64,15 @@ function draw() {
     // }
   }
     // console.log("far: "+ far);
-    debugPrint("far: "+ far);
-    //== MY CODE==
-
+  //debugPrint("far: "+ far);
+  //== MY CODE==
     for (let i = 0; i<squareArray.length;i++){
       squareArray[i].update();
       squareArray[i].show();
     }
-  // UPDATE CANVAS
-    
+
   }
-  
+
 }
 // DO NOT REMOVE THIS FUNCTION
 function connectBtnClick(e) {
