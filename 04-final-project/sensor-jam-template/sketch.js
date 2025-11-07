@@ -1,6 +1,7 @@
 let port; // Serial Communication port
 let connectBtn;
 
+let recvStr;
 let sensorVal;
 let circleSize = 50;
 let targetSize = 50; // used for Option 2
@@ -11,7 +12,7 @@ function setup() {
   noStroke();
   colorMode(HSB,360,100,100,100);
   createCanvas(windowWidth, windowHeight);
-  port = createSerial(); // creates the Serial Port
+  port = createSerial(9600); // creates the Serial Port
 
   // Connection helpers
   connectBtn = createButton("Connect to Arduino");
@@ -35,35 +36,65 @@ class Balls{
 
 function draw() {
   background(100);
+  
   fill(updateCol,100,100);
+
   ellipse(width / 2,height/2 + updateCol, circleSize);
+
   ballsArray.push( new Balls(width/2,height/2,updateCol))
+
   for(let i = ballsArray.length - 1; i >= 0; i--){
         ballsArray[i].drawBall();
         ballsArray[i].updateBall();
   }
 
   for (let i=0;i<updateCol;i++){
-    ballsArray.push(new Balls(random(width),random(height),20))
+    ballsArray.push(new Balls(random(width),random(height),updateCol))
   }
 
   if(ballsArray.length>100){
     ballsArray.splice(0,100);
   }
   // console.log(ballsArray.length);
+  // Receive data from Arduino
+
+
+  if (port.opened()) {
+    let recvStr = port.readUntil("\n");
+    if(recvStr && recvStr.includes("cm")){
+      let cleanedStr= recvStr.replace("cm","").trim();
+      let sensorVal= parseFloat(cleanedStr);
+
+      if (!isNaN(sensorVal)){
+        console.log("sensorVal: "+sensorVal);
+      }else{
+        console.warn("NaN detected - cleanedStr was:", cleanedStr);
+      }
+    }
+    // console.log(recvStr);
+    // let cleanedStr= recvStr.replace("cm","");
+    
+    // let sensorVal= float(cleanedStr);
+    
+    //    console.log("sensorVal:"+ sensorVal);
+    
+    
+    // Only log data that has information, not empty signals
+    //console.log(sensorVal[0]);
     
 
-  // Receive data from Arduino
-  if (port.opened()) {
-    sensorVal = port.readUntil("\n");
-    if (frameCount % 40 === 0) {
-      console.log(sensorVal);
-    }
-    // Only log data that has information, not empty signals
-    if (sensorVal[0]) {
+    // if (recvStr[0] == 'D') {
+    //   console.log(" inside if condition ")
+
       // Once you verify data is coming in,
-      // disable logging to improve performance
-      console.log(sensorVal);
+      // disable logging to improve performanceide
+
+      //console.log(">>>>>");
+      //console.log(recvStr.substring(10,recvStr.length-4));
+
+      // sensorVal = int(recvStr.substring(10,recvStr.length-4));
+      // console.log(sensorVal)
+
 
       // OPTION 1:
       // Update circle's size with sensor's data directly
@@ -76,14 +107,18 @@ function draw() {
       // Update circle's size using lerp() to smoothly change values
       // This method even works with longer delay() values in Arduino
 
-      targetSize = float(sensorVal);
-      updateCol = float(sensorVal);
+      // targetSize = float(sensorVal);
+      // updateCol = float(sensorVal);
       
+    //   if(frameCount%40===0){
+
+    //     // console.log("targetSize"+targetSize);
+    //   }
      
-      // last value in lerp() controls speed of change
-      circleSize = lerp(circleSize, targetSize, 0.1);
+    //   // last value in lerp() controls speed of change
+    //   circleSize = lerp(circleSize, targetSize, 0.1);
       
-    }
+    // }
   }
 }
 
