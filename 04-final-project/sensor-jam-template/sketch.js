@@ -12,13 +12,14 @@ let size = 10;
 let gapDistance; // the closer person is to screen -> more area break
 let affectedAmt;
 let fadeStrength =4;
+
 function setup() {
   // colorMode(HSB,360,100,100,100);
   w=windowWidth;
   h=windowHeight;
   createCanvas(w, h);
   stroke(0);
-  background(220);
+  background(255);
 
 // == CREATE GRID IN ARRAY ==
   for (let i=0;i<=w;i+=size){
@@ -34,8 +35,7 @@ function setup() {
 function draw() {
   
   //== CLEAN FRAME ==
-  background(220);
-  fill(0);
+  background(255);
   // == RECEIVE ARDUINO ==
   if (port.opened()) {
     // read value from port and convert to float 
@@ -58,7 +58,9 @@ function draw() {
   //== UPDATE AND SHOW ==
     for (let i = 0; i<squareArray.length;i++){
       // squareArray[i].breakUpdate(w/2,h/2,affectedAmt); //radius of affected area
-      squareArray[i].show(w/2,h/2,affectedAmt);
+
+      squareArray[i].breakUpdate(affectedAmt,gapDistance); 
+      squareArray[i].show();
     }
   }
 }
