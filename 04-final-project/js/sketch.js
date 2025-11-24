@@ -23,7 +23,6 @@ let gapDistanceSlider, gravitySlider; // gravitySlider;
 let myObject;
 function setup() {
   serialPort();
-  // colorMode(HSB,360,100,100,100);
   w=windowWidth;
   h=windowHeight;
   createCanvas(w, h);
@@ -59,18 +58,8 @@ function setup() {
 }
 
 function draw() {
-    // == GET DISTANCE VALUE EVERY X AMT OF FRAMES ==
-  // if (frameCount % 20 == 0) {
-    
-  //   // gapDistance=floor(random(1,300));
-  //   // gapDistance=500;
-  //   // console.log(gapDistance);
-  //   console.log(gravitySlider.value());
-  // }
+
   background(255);
-  
-  // == CONVERT GAP DISTANCE TO AFFECTED AMT VALUE ==
-  
 
   // == UPDATE EACH SQUARE ==
   for (let sq of squareArray) {
@@ -99,7 +88,6 @@ function draw() {
 
         // debugPrint("sensorVal: "+sensorVal);
         convertValue(gapDistance); 
-        
 
       }else{
         console.warn("NaN detected - cleanedStr was:", cleanedStr);
@@ -110,5 +98,5 @@ function draw() {
     sq.show();
   }
   }
-}
+  }
 }

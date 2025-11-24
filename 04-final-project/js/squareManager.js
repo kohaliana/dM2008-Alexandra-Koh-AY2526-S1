@@ -42,7 +42,7 @@ class lineSquare {
   breakUpdate(c, s) {
     //== CHECK IF SQUARE's Y > THRESHOLD
     if (this.points[0].y > c+random(randomAfflictedMinAmt,randomAfflictedMaxAmt)) {
-      this.drop(); // let Verlet motion take over
+      this.drop(); 
     }
     // START RESTORE MODE IF MORE THAN THRESHOLD
     if (s > 300 && !this.restoring) {
