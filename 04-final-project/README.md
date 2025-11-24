@@ -10,4 +10,4 @@ To create more intererst, I then replaced the square with 4 lines to increase th
 
 The restoring factor was needed to show structure's resilience and ability to recover when left alone. After a certain distance, when the distance is far enough, the grid was to be recalled. I tried looping at first til I found an elastic easing with ai, and it turned out quite mesmerising to watch compared to the other tests of bleak straight falling with randomness or lerping. 
 
-Overall, I found this project eye opening to the possibilities of interactive art, from fellow peers' creative projects as well.  This undertaking has allowed me to apply learning of arrays, for loops, serial ports, sensors, and ui in p5js and html and has helped me further to internalize the taught concepts to use in my specialization of game design. 
+Overall, I found this project eye opening to the possibilities of interactive art, from fellow peers' creative projects as well.  This undertaking has allowed me to apply learning of arrays, for loops, serial ports, sensors, and ui in p5js and html and has helped me to further internalize the taught concepts to use in my specialization of game design. 
